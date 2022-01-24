@@ -12,18 +12,16 @@ import (
 	"time"
 )
 
-type Options struct {
+type BaseOptions struct {
 	Path string
 }
 
-func GetDefaultOptions() *Options {
-	return &Options{
-		Path: "./conf/conf.yaml",
-	}
+var baseOptions = &BaseOptions{
+	Path: "./conf/conf.yaml",
 }
 
-func InitConfig(options *Options) {
-	viper.SetConfigFile(options.Path)
+func InitConfig() {
+	viper.SetConfigFile(baseOptions.Path)
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("read config failed: err=%v", err)
 	}
