@@ -16,16 +16,14 @@ type Options struct {
 	Path string
 }
 
-var options *Options
-
-func initOptions() {
-	options = &Options{
+func getDefaultOptions() *Options {
+	return &Options{
 		Path: "./conf/conf.yaml",
 	}
 }
 
 func InitConfig() {
-	initOptions()
+	options := getDefaultOptions()
 
 	viper.SetConfigFile(options.Path)
 	if err := viper.ReadInConfig(); err != nil {
