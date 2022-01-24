@@ -1,4 +1,4 @@
-module github.com/carefreeskyio/config
+module github.com/carefreex-io/config
 
 go 1.16
 
