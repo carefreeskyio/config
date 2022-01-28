@@ -1,6 +1,7 @@
 package config
 
 import (
+	"flag"
 	"github.com/spf13/afero"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -17,10 +18,15 @@ type CustomOptions struct {
 }
 
 var DefaultCustomOptions = &CustomOptions{
-	Path: "../conf/conf.yaml",
+	Path: "./conf/conf.yaml",
 }
 
 func InitConfig() {
+	p := flag.String("c", "", "the config path")
+	flag.Parse()
+	if *p != "" {
+		DefaultCustomOptions.Path = *p
+	}
 	viper.SetConfigFile(DefaultCustomOptions.Path)
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("read config failed: err=%v", err)
